@@ -1,0 +1,41 @@
+{
+  "name": "readimage",
+  "version": "0.0.0",
+  "description": "Read an image (jpg, png, gif) into memory in the same format.",
+  "main": "readimage.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/"
+  },
+  "keywords": [
+    "image",
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "read"
+  ],
+  "author": "Bryce B. Baril",
+  "license": "MIT",
+  "dependencies": {
+    "buffer-equal": "0.0.1",
+    "isnumber": "^1.0.0",
+    "jpeg-js": "0.0.4",
+    "omggif": "^1.0.5",
+    "pngparse": "^2.0.1"
+  },
+  "devDependencies": {
+    "tape": "^2.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:revisitors/readimage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/revisitors/readimage/issues"
+  },
+  "homepage": "https://github.com/revisitors/readimage"
+}
