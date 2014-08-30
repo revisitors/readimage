@@ -49,11 +49,35 @@ function parsePng(buffer, callback) {
     if (err) {
       return callback(err)
     }
-    if (image.channels != 4) {
-      return callback(new Error("Currently only 4 channel PNGs supported. File an issue if you need this."))
+    var rgba = image.data
+    if (image.channels === 1) {
+      rgba = new Buffer(image.height * image.width * 4)
+      for (var i = 0; i < image.data.length; i++) {
+        var idx = i * 4
+        rgba[idx] = rgba[idx + 1] = rgba[idx + 2] = image.data[i]
+        rgba[idx + 3] = 0xff
+      }
+    }
+    if (image.channels === 2) {
+      rgba = new Buffer(image.height * image.width * 4)
+      for (var i = 0; i < image.data.length; i += 2) {
+        var idx = i * 4
+        rgba[idx] = rgba[idx + 1] = rgba[idx + 2] = image.data[i]
+        rgba[idx + 3] = image.data[i + 1]
+      }
+    }
+    if (image.channels === 3) {
+      rgba = new Buffer(image.height * image.width * 4)
+      for (var i = 0; i < image.data.length; i += 3) {
+        var idx = i * 4
+        rgba[idx] = image.data[i]
+        rgba[idx + 1] = image.data[i + 1]
+        rgba[idx + 2] = image.data[i + 2]
+        rgba[idx + 3] = 0xff
+      }
     }
     var img = new Image(image.height, image.width)
-    img.addFrame(image.data)
+    img.addFrame(rgba)
     return callback(null, img)
   })
 }
