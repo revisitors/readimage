@@ -61,7 +61,7 @@ function parsePng(buffer, callback) {
     if (image.channels === 2) {
       rgba = new Buffer(image.height * image.width * 4)
       for (var i = 0; i < image.data.length; i += 2) {
-        var idx = i * 4
+        var idx = (i/2) * 4
         rgba[idx] = rgba[idx + 1] = rgba[idx + 2] = image.data[i]
         rgba[idx + 3] = image.data[i + 1]
       }
@@ -69,7 +69,7 @@ function parsePng(buffer, callback) {
     if (image.channels === 3) {
       rgba = new Buffer(image.height * image.width * 4)
       for (var i = 0; i < image.data.length; i += 3) {
-        var idx = i * 4
+        var idx = (i/3) * 4
         rgba[idx] = image.data[i]
         rgba[idx + 1] = image.data[i + 1]
         rgba[idx + 2] = image.data[i + 2]

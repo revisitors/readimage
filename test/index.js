@@ -59,6 +59,19 @@ test("3 chan png", function (t) {
     t.equals(image.width, 16, "yep, width")
     t.equals(image.frames.length, 1)
     t.equals(image.frames[0].data.length, image.height * image.width * 4, "right data length")
+
+    var idx = 0 * 4;
+    t.equals(image.frames[0].data[idx+0], 255, 'red: r');
+    t.equals(image.frames[0].data[idx+1], 0, 'red: g');
+    t.equals(image.frames[0].data[idx+2], 0, 'red: b');
+    t.equals(image.frames[0].data[idx+3], 255, 'red: a');
+
+    var idx = 15 * 4;
+    t.equals(image.frames[0].data[idx+0], 0, 'green: r');
+    t.equals(image.frames[0].data[idx+1], 255, 'green: g');
+    t.equals(image.frames[0].data[idx+2], 0, 'green: b');
+    t.equals(image.frames[0].data[idx+3], 255, 'green: a');
+
     t.end()
   })
 })
