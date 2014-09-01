@@ -7,6 +7,14 @@ var readfile = function (filename) {
   return fs.readFileSync(__dirname + "/" + filename)
 }
 
+function pixelEquals(t, pindex, image, r, g, b, a) {
+  var idx = pindex * 4;
+  t.equals(image.frames[0].data[idx+0], r, 'pixel ' + pindex + ' r');
+  t.equals(image.frames[0].data[idx+1], g, 'pixel ' + pindex + ' g');
+  t.equals(image.frames[0].data[idx+2], b, 'pixel ' + pindex + ' b');
+  t.equals(image.frames[0].data[idx+3], a, 'pixel ' + pindex + ' a');
+}
+
 test("png", function (t) {
   var buf = readfile("../examples/ravenwall.png")
   readimage(buf, function (err, image) {
@@ -59,6 +67,10 @@ test("3 chan png", function (t) {
     t.equals(image.width, 16, "yep, width")
     t.equals(image.frames.length, 1)
     t.equals(image.frames[0].data.length, image.height * image.width * 4, "right data length")
+
+    pixelEquals(t, 0, image, 255, 0, 0, 255);
+    pixelEquals(t, 15, image, 0, 255, 0, 255);
+
     t.end()
   })
 })
